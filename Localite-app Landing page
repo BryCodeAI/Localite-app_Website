@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Localité</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 680px;
+      padding: 32px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .small {
+      margin-top: 32px;
+      font-size: 14px;
+      color: #777;
+    }
+
+    a {
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Localité</h1>
+    <p>
+      Localité helps you discover an unplanned quick bite to eat wth a close friend or an unplanned game of pickelball with aquantices,
+      based on groups, and location.
+    </p>
+
+    <p class="small">
+      Coming soon. Contact: <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a>
+    </p>
+  </main>
+</body>
+</html>
