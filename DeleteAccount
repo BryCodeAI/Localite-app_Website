@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Deletion - Localité</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #fafafa;
+      color: #111;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    h1 {
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin-top: 32px;
+    }
+
+    a {
+      color: #111;
+    }
+
+    form {
+      margin-top: 24px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font: inherit;
+      background: #fff;
+      color: #111;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    .checkbox-row input {
+      width: auto;
+      margin-top: 6px;
+    }
+
+    .checkbox-row label {
+      margin: 0;
+      font-weight: 400;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .note {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .success {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      background: #f0f8f0;
+      border: 1px solid #cde8cd;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Localité Account Deletion</h1>
+
+    <p>
+      Localité users can delete their account directly in the app from the
+      account settings screen.
+    </p>
+
+    <p>
+      If you no longer have access to the app, you can use this page to request
+      deletion of your Localité account and associated data.
+    </p>
+
+    <h2>What will be deleted</h2>
+
+    <p>
+      After we verify account ownership, we will delete your Localité account
+      and associated app data tied to that account, such as profile information,
+      app activity, groups, sessions, messages, and location-sharing records
+      where applicable.
+    </p>
+
+    <p class="note">
+      Some limited information may be retained if required for legal, security,
+      abuse-prevention, dispute-resolution, or backup purposes.
+    </p>
+
+    <h2>Request account deletion</h2>
+
+    <p>
+      Submit the email address associated with your Localité account. We may
+      contact you to verify account ownership before deleting the account.
+    </p>
+
+    <form id="deletionForm">
+      <label for="email">Account email address</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+      />
+
+      <label for="details">Additional details optional</label>
+      <textarea
+        id="details"
+        name="details"
+        placeholder="Add any details that may help us identify your account."
+      ></textarea>
+
+      <div class="checkbox-row">
+        <input
+          type="checkbox"
+          id="confirm"
+          name="confirm"
+          required
+        />
+        <label for="confirm">
+          I understand this is a request to delete my Localité account and
+          associated data.
+        </label>
+      </div>
+
+      <button type="submit">Request Account Deletion</button>
+
+      <div id="successMessage" class="success">
+        Your deletion request has been prepared. Please send the email that
+        opens in your mail app so we can process your request.
+      </div>
+    </form>
+
+    <h2>Future automated request handling</h2>
+
+    <p class="note">
+      This page currently sends deletion requests by email. A secure request
+      endpoint may be added later to submit requests directly to Localité.
+    </p>
+
+    <p>
+      You can also contact us directly at:
+      <a href="mailto:support@localite-app.com">support@localite-app.com</a>
+    </p>
+
+    <p>
+      <a href="support.html">Back to Support</a>
+    </p>
+
+    <p>
+      <a href="index.html">Back to Localité</a>
+    </p>
+  </main>
+
+  <script>
+    const deletionForm = document.getElementById("deletionForm");
+    const successMessage = document.getElementById("successMessage");
+
+    deletionForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const details = document.getElementById("details").value.trim();
+
+      const subject = "Localité Account Deletion Request";
+
+      const body = [
+        "I am requesting deletion of my Localité account and associated data.",
+        "",
+        "Account email:",
+        email,
+        "",
+        "Additional details:",
+        details || "None provided",
+        "",
+        "I understand Localité may need to verify account ownership before deleting the account."
+      ].join("\n");
+
+      const mailtoLink =
+        "mailto:support@localite-app.com" +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+      successMessage.style.display = "block";
+      window.location.href = mailtoLink;
+
+      /*
+        Future Supabase Edge Function placeholder:
+
+        fetch("https://YOUR_SUPABASE_PROJECT.functions.supabase.co/request-account-deletion", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            details,
+            source: "web"
+          })
+        });
+      */
+    });
+  </script>
+</body>
+</html>
